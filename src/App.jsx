@@ -1,15 +1,14 @@
-import { Button } from "./components/ui/button"
-
+import { Routes, Route } from "react-router-dom";
+import Landing from "./pages/public/Landing";
+import PhoneNumber from "./pages/auth/PhoneNumber";
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline cursor-pointer">
-        Hello world!
-      </h1>
-      <Button className="cursor-pointer">Button</Button>
-    </>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<PhoneNumber />} />
+    </Routes>
   )
-}
+};
 
-export default App
+export default App;
