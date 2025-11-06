@@ -1,15 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 // import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyBtCrcxkwa-sKZHSkwgVfnO_6G1X0pDs_c",
+  authDomain: "chat-app-c552d.firebaseapp.com",
+  projectId: "chat-app-c552d",
+  storageBucket: "chat-app-c552d.firebasestorage.app",
+  messagingSenderId: "71880683398",
+  appId: "1:71880683398:web:bee5f58cf489502a34c607",
+  measurementId: "G-MK4Y6B0QC0",
 };
 
 const app = initializeApp(firebaseConfig);

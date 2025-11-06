@@ -36,7 +36,8 @@ export default function PhoneNumber() {
         // Clean old verifier on hot reloads/navigations
         return () => {
             if (window.recaptchaVerifier) {
-                try { window.recaptchaVerifier.clear(); } catch { }
+                try { window.recaptchaVerifier.clear(); } catch {console.log('hi');
+                }
                 window.recaptchaVerifier = null;
             }
         };
@@ -62,7 +63,8 @@ export default function PhoneNumber() {
                 });
             } else {
                 // if existing instance tied to another container, reattach silently
-                try { window.recaptchaVerifier.render(); } catch { }
+                try { window.recaptchaVerifier.render(); } catch {console.log('hi');
+                }
             }
 
             const confirmationResult = await signInWithPhoneNumber(auth, e164, window.recaptchaVerifier);
@@ -80,7 +82,8 @@ export default function PhoneNumber() {
                     window.recaptchaVerifier.clear();
                     window.recaptchaVerifier = null;
                 }
-            } catch { }
+            } catch { console.log("hi");
+             }
         } finally {
             setLoading(false);
         }
