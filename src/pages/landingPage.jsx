@@ -9,7 +9,7 @@ export default function LandingPage() {
       {/* Card */}
       <div className="p-8 text-center max-w-sm w-full">
         {/* Logo */}
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center mb-5 animate-scaleUp">
           <div className="p-3 bg-amber-100 rounded-full shadow-sm">
             <MessagesSquare className="w-10 h-10 text-amber-600" />
           </div>
@@ -22,7 +22,7 @@ export default function LandingPage() {
 
         {/* Button */}
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/Login")}
           className="mt-6 w-full bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 rounded-full shadow-md transition duration-200 hover:cursor-pointer"
         >
           Get Started

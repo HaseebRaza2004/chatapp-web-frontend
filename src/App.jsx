@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import PhoneNumber from "./pages/auth/PhoneNumber";
 import LandingPage from "./pages/landingPage";
+import PhoneNumber from "./pages/PhoneNumber";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<PhoneNumber />} />
+      <Route path="/Login" element={<PhoneNumber />} />
     </Routes>
   )
 };
