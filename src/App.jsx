@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/landingPage";
+import LandingPage from "./pages/LandingPage";
 import PhoneNumber from "./pages/PhoneNumber";
 import VerifyOTP from "./pages/VerifyOTP";
 import ProfileSetup from "./pages/ProfileSetup";

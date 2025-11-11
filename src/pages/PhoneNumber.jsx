@@ -1,12 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import PhoneInputForm from "../components/Forms/PhoneInputForm";
+import PhoneInputForm from "../components/forms/PhoneInputForm";
 import Logo from "@/components/Logo";
 
 export default function PhoneNumber() {
   const navigate = useNavigate();
 
-  const handleFormSubmit = ({ phone }) => {
-    navigate(`/verify?phone=${encodeURIComponent(phone)}`);
+  const handleFormSubmit = (
+    // { phone }
+  ) => {
+    navigate(
+      // `/verify?phone=${encodeURIComponent(phone)}`
+      `/VerifyOTP`
+    );
   };
 
   return (

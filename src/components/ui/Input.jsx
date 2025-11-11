@@ -27,7 +27,7 @@ export default function Input({
       {label && <label htmlFor={id || name} className="block text-sm text-gray-600 mb-1">{label}</label>}
 
       <div className={`${baseWrapper} ${errorClasses}`}>
-        {icon && <div className="flex-shrink-0 text-gray-500">{icon}</div>}
+        {icon && <div className="shrink-0 text-gray-500">{icon}</div>}
 
         <input
           id={id || name}
@@ -42,7 +42,7 @@ export default function Input({
           {...rest}
         />
 
-        {rightIcon && <div className="flex-shrink-0 text-gray-400">{rightIcon}</div>}
+        {rightIcon && <div className="shrink-0 text-gray-400">{rightIcon}</div>}
       </div>
 
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
