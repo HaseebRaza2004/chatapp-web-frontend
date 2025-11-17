@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Send, Image, Paperclip } from "lucide-react";
 import Input from "../ui/Input";
-import Button from "../ui/Button";
+import Button from "../ui/ButtonTEMP";
 
 export default function ChatInputForm({ onSend }) {
   const [message, setMessage] = useState("");

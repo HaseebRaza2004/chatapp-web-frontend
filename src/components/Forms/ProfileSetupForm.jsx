@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "../ui/Input";
-import Button from "../ui/Button";
+import Button from "../ui/ButtonTEMP";
 import { User, Image as ImageIcon } from "lucide-react";
 
 export default function ProfileSetupForm({ onSubmit }) {

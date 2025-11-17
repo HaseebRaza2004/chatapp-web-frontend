@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Logo from "../components/Logo";
-import Button from "../components/ui/Button";
+import Button from "../components/ui/ButtonTEMP";
 import Input from "../components/ui/Input";
 
 export default function VerifyOTP() {
