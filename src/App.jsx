@@ -1,10 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
 import PhoneNumber from "./pages/PhoneNumber";
 import VerifyOTP from "./pages/VerifyOTP";
 import ProfileSetup from "./pages/ProfileSetup";
-import ContactsPage from "./pages/ContactsPage";
 import ChatDashboard from "./pages/ChatDashboard";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
@@ -15,7 +14,7 @@ function App() {
       <Route path="/Setup-Profile" element={<ProfileSetup />} />
       <Route path="/Contacts" element={<ChatDashboard />} />
     </Routes>
-  )
-};
+  );
+}
 
 export default App;
