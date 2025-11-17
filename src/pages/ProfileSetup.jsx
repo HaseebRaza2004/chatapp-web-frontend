@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
-import ProfileSetupForm from "../components/forms/ProfileSetupFormTEMP";
+import ProfileSetupForm from "../components/forms/ProfileSetupForm";
 
 export default function ProfileSetup() {
   const navigate = useNavigate();

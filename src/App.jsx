@@ -3,7 +3,7 @@ import PhoneNumber from "./pages/PhoneNumber";
 import VerifyOTP from "./pages/VerifyOTP";
 import ProfileSetup from "./pages/ProfileSetup";
 import ChatDashboard from "./pages/ChatDashboard";
-import LandingPage from "./pages/LandingPageTEMP";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
