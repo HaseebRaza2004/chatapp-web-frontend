@@ -1,23 +1,19 @@
+import { useEffect, useRef } from "react";
+import MessageBubble from "./MessageBubble";
+
 export default function ChatMessages({ messages }) {
+  const listRef = useRef(null);
+
+  // auto-scroll on new message
+  useEffect(() => {
+    if (!listRef.current) return;
+    listRef.current.scrollTop = listRef.current.scrollHeight;
+  }, [messages]);
+
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-3">
+    <div ref={listRef} className="flex-1 overflow-y-auto p-4 space-y-3 bg-stone-50">
       {messages.map((m) => (
-        <div
-          key={m.id}
-          className={`flex ${
-            m.sender === "me" ? "justify-end" : "justify-start"
-          }`}
-        >
-          <div
-            className={`px-4 py-2 rounded-2xl text-sm max-w-[70%] ${
-              m.sender === "me"
-                ? "bg-amber-500 text-white"
-                : "bg-stone-200 text-gray-800"
-            }`}
-          >
-            {m.text}
-          </div>
-        </div>
+        <MessageBubble key={m.id} text={m.text} sender={m.sender} time={m.time} />
       ))}
     </div>
   );

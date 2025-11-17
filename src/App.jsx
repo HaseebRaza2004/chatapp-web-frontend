@@ -12,7 +12,7 @@ function App() {
       <Route path="/Login" element={<PhoneNumber />} />
       <Route path="/VerifyOTP" element={<VerifyOTP />} />
       <Route path="/Setup-Profile" element={<ProfileSetup />} />
-      <Route path="/Contacts" element={<ChatDashboard />} />
+      <Route path="/Chats" element={<ChatDashboard />} />
     </Routes>
   );
 }
