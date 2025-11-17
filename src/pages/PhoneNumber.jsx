@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import PhoneInputForm from "../components/forms/PhoneInputForm";
+import PhoneInputForm from "../components/forms/PhoneInputFormTEMP";
 import Logo from "@/components/Logo";
 
 export default function PhoneNumber() {
