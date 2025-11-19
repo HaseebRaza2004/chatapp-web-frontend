@@ -5,53 +5,42 @@ import ChatMessages from "../components/chat/ChatMessages";
 import ChatInputForm from "../components/forms/ChatInputForm";
 
 export default function ChatDashboard() {
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedChat, setSelectedChat] = useState('offline');
+
   const [messagesMap, setMessagesMap] = useState({
-    // chatId -> messages array
     1: [
-      { id: 1, sender: "me", text: "Hey! How are you?", time: "10:00" },
-      { id: 2, sender: "them", text: "I'm good! You?", time: "10:01" },
+      { id: 1, senderId: "me", text: "Hey! How are you?" },
+      { id: 2, senderId: "them", text: "I'm good! You?" },
     ],
-    2: [{ id: 3, sender: "them", text: "Hello from chat 2", time: "09:45" }],
+    3: [
+      // group data example
+      { id: 10, senderId: "2", senderName: "Haseeb", text: "Dinner tonight?" },
+      { id: 11, senderId: "me", text: "Yes!" },
+    ],
   });
 
   const handleSend = (text) => {
     if (!selectedChat) return;
+
     const chatId = selectedChat.id;
+
     const newMsg = {
       id: Date.now(),
-      sender: "me",
+      senderId: "me",
       text,
-      time: new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
     };
-    setMessagesMap((m) => ({ ...m, [chatId]: [...(m[chatId] || []), newMsg] }));
 
-    // simulate reply for dev/testing (remove when real backend)
-    setTimeout(() => {
-      const reply = {
-        id: Date.now() + 1,
-        sender: "them",
-        text: "Auto-reply: got it",
-        time: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      };
-      setMessagesMap((m) => ({
-        ...m,
-        [chatId]: [...(m[chatId] || []), newMsg, reply],
-      }));
-    }, 800);
+    setMessagesMap((prev) => ({
+      ...prev,
+      [chatId]: [...(prev[chatId] || []), newMsg],
+    }));
   };
 
   const messages = selectedChat ? messagesMap[selectedChat.id] || [] : [];
-
+  
   return (
     <div className="flex h-screen bg-stone-50">
-      {/* LEFT: Contacts */}
+      {/* LEFT: CONTACTS */}
       <div
         className={`${
           selectedChat ? "hidden md:flex" : "flex"
@@ -60,14 +49,17 @@ export default function ChatDashboard() {
         <ContactsPage onSelect={setSelectedChat} />
       </div>
 
-      {/* RIGHT: Chat Window */}
+      {/* RIGHT: CHAT WINDOW */}
       <div
         className={`${
           selectedChat ? "flex" : "hidden md:flex"
         } flex-col flex-1 bg-white`}
       >
         <ChatHeader chat={selectedChat} onBack={() => setSelectedChat(null)} />
-        <ChatMessages messages={messages} />
+        <ChatMessages
+          messages={messages}
+          isGroup={selectedChat?.type === "group"}
+        />
         <ChatInputForm onSend={handleSend} />
       </div>
     </div>

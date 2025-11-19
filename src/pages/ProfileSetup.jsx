@@ -7,7 +7,7 @@ export default function ProfileSetup() {
 
   const handleProfileSubmit = ({ name, photo }) => {
     console.log("Profile data:", { name, photo });
-    navigate("/Contacts");
+    navigate("/Chats");
   };
 
   return (
