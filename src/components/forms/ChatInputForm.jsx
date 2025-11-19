@@ -1,39 +1,46 @@
-import { useState } from "react";
-import { Send, Image, Paperclip } from "lucide-react";
+import { Paperclip, Image, Send } from "lucide-react";
 import Button from "../ui/Button";
-import Input from "../ui/Input";
+import { useRef } from "react";
 
-export default function ChatInputForm({ onSend }) {
-  const [message, setMessage] = useState("");
+export default function ChatInputForm({
+  onSend,
+  placeholder = "Type a message",
+}) {
+  const inputRef = useRef(null);
 
-  const handleSend = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    if (!message.trim()) return;
-    onSend(message);
-    setMessage("");
-  };
+    const text = inputRef.current?.value?.trim();
+    if (!text) return;
+
+    onSend(text);
+    inputRef.current.value = "";
+  }
 
   return (
     <form
-      onSubmit={handleSend}
-      className="flex items-center gap-2 p-3 border-t"
+      onSubmit={handleSubmit}
+      className="flex items-center gap-2 p-3 border-t bg-white"
     >
-      <Paperclip className="w-8 h-8 text-gray-500" />
-      <Image className="w-8 h-8 text-gray-500" />
+      {/* Attachments */}
+      <button type="button" className="text-gray-500 hover:text-amber-600">
+        <Paperclip className="w-5 h-5" />
+      </button>
 
-      <Input
-        placeholder="Type a message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className="flex-1"
+      <button type="button" className="text-gray-500 hover:text-amber-600">
+        <Image className="w-5 h-5" />
+      </button>
+
+      {/* ✔ Only ONE input now */}
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder={placeholder}
+        className="flex-1 border border-stone-300 rounded-lg px-3 py-2 outline-none
+                   focus:ring-2 focus:ring-amber-400 focus:border-amber-500 bg-stone-50"
       />
 
-      <Button 
-      type="submit" 
-      variant="primary"
-      size="md"
-      fullWidth={false}
->
+      <Button type="submit" variant="primary" size="md" fullWidth={false}>
         <Send className="w-4 h-4" />
       </Button>
     </form>

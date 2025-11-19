@@ -5,8 +5,8 @@ export default function ContactsList({ contacts, onSelect }) {
         contacts.map((c) => (
           <div
             key={c.id}
+            onClick={() => onSelect(c)}
             className="flex items-center justify-between p-3 rounded-lg hover:bg-amber-50 cursor-pointer transition"
-            onClick={() => onSelect(c)} // ✔ FIXED
           >
             <div className="flex items-center gap-3">
               <div className="relative">
@@ -17,7 +17,6 @@ export default function ContactsList({ contacts, onSelect }) {
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
                 )}
               </div>
-
               <div>
                 <h3 className="text-sm font-medium text-gray-800">{c.name}</h3>
                 <p className="text-xs text-gray-500">{c.lastMsg}</p>
