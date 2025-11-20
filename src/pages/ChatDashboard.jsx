@@ -56,10 +56,25 @@ export default function ChatDashboard() {
         id: 10,
         senderId: "u1",
         senderName: "Ali",
-        text: "Hello family!",
+        text: "Hello family! What's the plan for today?",
         time: "09:00",
       },
       { id: 11, senderId: "me", text: "Hi!", time: "09:02" },
+      { id: 12, senderId: "me", text: "Hello!", time: "09:02" },
+      {
+        id: 13,
+        senderId: "u2",
+        senderName: "Issa",
+        text: "Hey everyone!",
+        time: "09:30",
+      },
+      {
+        id: 14,
+        senderId: "u3",
+        senderName: "Areeba",
+        text: "Hi all!",
+        time: "10:00",
+      },
     ],
   });
 
@@ -98,7 +113,6 @@ export default function ChatDashboard() {
           }}
         />
       </div>
-
       {/* RIGHT CHAT WINDOW */}
       <div
         className={`${
@@ -126,27 +140,25 @@ export default function ChatDashboard() {
         />
       </div>
 
-      {/* DESKTOP GROUP INFO (right sidebar) */}
-      <div className="hidden md:block">
-        {selectedChat?.type === "group" && showInfo && (
-          <GroupInfoPanel
-            group={selectedChat}
-            onClose={() => setShowInfo(false)}
-          />
-        )}
-      </div>
-
-      {/* MOBILE FULL SCREEN GROUP INFO */}
-      <div className="md:hidden">
-        {selectedChat?.type === "group" && showInfo && (
-          <div className="fixed inset-0 bg-white z-50 animate-fadeIn">
+      {selectedChat?.type === "group" && showInfo && (
+        <>
+          {/* DESKTOP RIGHT PANEL (lg and xl) */}
+          <div className="hidden lg:block fixed right-0 top-0 h-full w-80 border-l bg-stone-50 z-40">
             <GroupInfoPanel
               group={selectedChat}
               onClose={() => setShowInfo(false)}
             />
           </div>
-        )}
-      </div>
+
+          {/* MOBILE MODAL (sm and md) */}
+          <div className="lg:hidden fixed inset-0 bg-white z-50 animate-fadeIn">
+            <GroupInfoPanel
+              group={selectedChat}
+              onClose={() => setShowInfo(false)}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

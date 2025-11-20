@@ -1,13 +1,11 @@
 export default function GroupInfoPanel({ group, onClose }) {
-    console.log("group =>",group);
-    
   if (!group || group.type !== "group") return null;
 
   // Convert members into a SAFE ARRAY
   const members = Array.isArray(group.members) ? group.members : [];
 
   return (
-    <aside className="w-80 border-l bg-stone-50 p-4 hidden lg:block">
+    <div className="w-full lg:w-80 border-l bg-stone-50 p-4 h-full overflow-y-auto">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-semibold text-gray-800">Group Info</h3>
         <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
@@ -16,7 +14,7 @@ export default function GroupInfoPanel({ group, onClose }) {
       </div>
 
       <div className="text-center mb-4">
-        <div className="w-24 h-24 rounded-full mx-auto bg-amber-200 flex items-center justify-center text-2xl font-semibold">
+        <div className="w-24 h-24 rounded-full mx-auto bg-amber-300 flex items-center justify-center text-2xl font-semibold">
           G
         </div>
         <h4 className="mt-3 font-medium text-gray-800">{group.name}</h4>
@@ -46,6 +44,6 @@ export default function GroupInfoPanel({ group, onClose }) {
           )}
         </div>
       </div>
-    </aside>
+    </div>
   );
 }

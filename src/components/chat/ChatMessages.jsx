@@ -1,48 +1,29 @@
-import { useEffect, useRef } from "react";
+import MessageBubble from "./MessageBubble";
 
-/**
- * messages: [{ id, senderId, senderName?, text, time? }]
- * isGroup: boolean
- */
-export default function ChatMessages({ messages = [], isGroup = false }) {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    ref.current.scrollTop = ref.current.scrollHeight;
-  }, [messages]);
-
+export default function ChatMessages({ messages = [], isGroup }) {
   return (
-    <div ref={ref} className="flex-1 overflow-y-auto p-4 space-y-3 bg-stone-50">
-      {messages.map((m) => {
-        const isMe = m.senderId === "me";
+    <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      {messages.map((msg) => {
+        const isMe = msg.senderId === "me";
+
         return (
           <div
-            key={m.id}
-            className={`flex ${isMe ? "justify-end" : "justify-start"}`}
+            key={msg.id}
+            className={`flex ${isMe ? "justify-end pr-2" : "justify-start pl-1"}`}
           >
-            <div
-              className={`px-4 py-2 rounded-2xl text-sm max-w-[78%] break-all whitespace-pre-wrap ${
-                isMe
-                  ? "bg-amber-500 text-white"
-                  : "bg-white text-gray-800 border border-stone-200"
-              }`}
-            >
-              {isGroup && !isMe && m.senderName && (
-                <div className="text-xs font-semibold text-amber-600 mb-1">
-                  {m.senderName}
-                </div>
+            <div>
+              {/* GROUP: sender name */}
+              {isGroup && !isMe && msg.senderName && (
+                <p className="text-[11px] text-gray-600 mb-0.5 ml-1">
+                  {msg.senderName}
+                </p>
               )}
-              <div>{m.text}</div>
-              {m.time && (
-                <div
-                  className={`text-[10px] mt-1 ${
-                    isMe ? "text-amber-100" : "text-gray-400"
-                  }`}
-                >
-                  {m.time}
-                </div>
-              )}
+
+              <MessageBubble
+                text={msg.text}
+                sender={isMe ? "me" : msg.senderId}
+                time={msg.time}
+              />
             </div>
           </div>
         );
