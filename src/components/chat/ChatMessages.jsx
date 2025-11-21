@@ -9,7 +9,9 @@ export default function ChatMessages({ messages = [], isGroup }) {
         return (
           <div
             key={msg.id}
-            className={`flex ${isMe ? "justify-end pr-2" : "justify-start pl-1"}`}
+            className={`flex ${
+              isMe ? "justify-end pr-2" : "justify-start pl-1"
+            }`}
           >
             <div>
               {/* GROUP: sender name */}

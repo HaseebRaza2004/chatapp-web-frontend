@@ -4,10 +4,20 @@ export default function MessageBubble({ text, sender, time }) {
   return (
     <div className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
       <div
-        className={`px-4 py-2 rounded-2xl text-sm max-w-[78%] break-all whitespace-pre-wrap
-          ${isMe ? "bg-amber-500 text-white mr-2" : "bg-stone-200 text-gray-800"}`}
+        className={`
+          px-4 py-2 rounded-2xl text-sm 
+          max-w-[96%] 
+          whitespace-normal wrap-break-word 
+          ${
+            isMe
+              ? "bg-amber-500 text-white mr-3"
+              : "bg-stone-200 text-gray-800 ml-1"
+          }
+        `}
+        style={{ wordBreak: "break-word" }}
       >
         <div>{text}</div>
+
         {time && (
           <div
             className={`text-[10px] mt-1 ${

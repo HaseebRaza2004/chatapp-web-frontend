@@ -75,6 +75,20 @@ export default function ChatDashboard() {
         text: "Hi all!",
         time: "10:00",
       },
+      {
+        id: 15,
+        senderId: "u1",
+        senderName: "Ali",
+        text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+        time: "10:05",
+      },
+      {
+        id: 16,
+        senderId: "u2",
+        senderName: "Issa",
+        text: "Hey everyone!",
+        time: "09:30",
+      },
     ],
   });
 
