@@ -2,9 +2,15 @@ import MessageBubble from "./MessageBubble";
 
 export default function ChatMessages({ messages = [], isGroup }) {
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-3">
-      {messages.map((msg) => {
+    <div className="flex-1 overflow-y-auto p-4 space-y-2">
+      {messages.map((msg, index) => {
         const isMe = msg.senderId === "me";
+        const prev = messages[index - 1];
+        const showSender =
+          isGroup &&
+          !isMe &&
+          msg.senderName &&
+          (!prev || prev.senderId !== msg.senderId);
 
         return (
           <div
@@ -14,9 +20,9 @@ export default function ChatMessages({ messages = [], isGroup }) {
             }`}
           >
             <div>
-              {/* GROUP: sender name */}
-              {isGroup && !isMe && msg.senderName && (
-                <p className="text-[11px] text-gray-600 mb-0.5 ml-1">
+              {/* GROUP: Show sender name only for first message of sender */}
+              {showSender && (
+                <p className="text-[11px] text-gray-600 mb-0.5 ml-1 font-medium">
                   {msg.senderName}
                 </p>
               )}
@@ -25,6 +31,8 @@ export default function ChatMessages({ messages = [], isGroup }) {
                 text={msg.text}
                 sender={isMe ? "me" : msg.senderId}
                 time={msg.time}
+                isGroup={isGroup}
+                isMe={isMe}
               />
             </div>
           </div>
