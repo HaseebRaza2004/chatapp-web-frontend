@@ -9,34 +9,33 @@ export default function ChatDashboard() {
   const [selectedChat, setSelectedChat] = useState(null);
   const [showInfo, setShowInfo] = useState(false);
 
-  // Sample data
+  // opponent typing state
+  const [partnerTyping, setPartnerTyping] = useState(false);
+
+  // ------- SAMPLE CONTACT LIST -------
   const Contacts = [
     {
       id: 1,
       type: "private",
       name: "Ahsan Ali",
-      lastMsg: "See you soon!",
       online: true,
     },
     {
       id: 2,
       type: "private",
       name: "Haseeb Raza",
-      lastMsg: "Got it ✅",
       online: false,
     },
     {
       id: 3,
       type: "private",
       name: "Amna Khan",
-      lastMsg: "Typing...",
       online: true,
     },
     {
       id: 4,
       type: "group",
       name: "Family Group",
-      lastMsg: "Ali: I'll come",
       members: [
         { id: "u1", name: "Ali" },
         { id: "u2", name: "Haseeb" },
@@ -45,7 +44,8 @@ export default function ChatDashboard() {
     },
   ];
 
-  // messages map
+  // ------- SAMPLE MESSAGES -------
+
   const [messagesMap, setMessagesMap] = useState({
     1: [
       { id: 1, senderId: "me", text: "Hey! How are you?", time: "10:00" },
@@ -56,34 +56,12 @@ export default function ChatDashboard() {
         id: 10,
         senderId: "u1",
         senderName: "Ali",
-        text: "Hello family! What's the plan for today?",
+        text: "Hello family! What's the plan?",
         time: "09:00",
       },
       { id: 11, senderId: "me", text: "Hi!", time: "09:02" },
-      { id: 12, senderId: "me", text: "Hello!", time: "09:02" },
       {
         id: 13,
-        senderId: "u2",
-        senderName: "Issa",
-        text: "Hey everyone!",
-        time: "09:30",
-      },
-      {
-        id: 14,
-        senderId: "u3",
-        senderName: "Areeba",
-        text: "Hi all!",
-        time: "10:00",
-      },
-      {
-        id: 15,
-        senderId: "u1",
-        senderName: "Ali",
-        text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-        time: "10:05",
-      },
-      {
-        id: 16,
         senderId: "u2",
         senderName: "Issa",
         text: "Hey everyone!",
@@ -92,6 +70,7 @@ export default function ChatDashboard() {
     ],
   });
 
+  // send message
   function handleSend(text) {
     if (!selectedChat) return;
 
@@ -101,12 +80,20 @@ export default function ChatDashboard() {
       minute: "2-digit",
     });
 
-    const newMsg = { id: Date.now(), senderId: "me", text, time };
+    const msg = {
+      id: Date.now(),
+      senderId: "me",
+      text,
+      time,
+    };
 
     setMessagesMap((m) => ({
       ...m,
-      [chatId]: [...(m[chatId] || []), newMsg],
+      [chatId]: [...(m[chatId] || []), msg],
     }));
+
+    // stop my typing indicator
+    setPartnerTyping(false);
   }
 
   const messages = selectedChat ? messagesMap[selectedChat.id] || [] : [];
@@ -124,9 +111,11 @@ export default function ChatDashboard() {
           onSelect={(c) => {
             setSelectedChat(c);
             setShowInfo(false);
+            setPartnerTyping(false);
           }}
         />
       </div>
+
       {/* RIGHT CHAT WINDOW */}
       <div
         className={`${
@@ -135,6 +124,7 @@ export default function ChatDashboard() {
       >
         <ChatHeader
           chat={selectedChat}
+          partnerTyping={partnerTyping}
           onBack={() => setSelectedChat(null)}
           onOpenInfo={() => setShowInfo((s) => !s)}
         />
@@ -142,21 +132,21 @@ export default function ChatDashboard() {
         <ChatMessages
           messages={messages}
           isGroup={selectedChat?.type === "group"}
+          partnerTyping={partnerTyping}
         />
 
         <ChatInputForm
           onSend={handleSend}
-          placeholder={
-            selectedChat?.type === "group"
-              ? "Message group..."
-              : "Type a message"
-          }
+          onTyping={(isTyping) => {
+            setPartnerTyping(isTyping);
+          }}
         />
       </div>
 
+      {/* GROUP INFO PANEL */}
       {selectedChat?.type === "group" && showInfo && (
         <>
-          {/* DESKTOP RIGHT PANEL (lg and xl) */}
+          {/* DESKTOP */}
           <div className="hidden lg:block fixed right-0 top-0 h-full w-80 border-l bg-stone-50 z-40">
             <GroupInfoPanel
               group={selectedChat}
@@ -164,7 +154,7 @@ export default function ChatDashboard() {
             />
           </div>
 
-          {/* MOBILE MODAL (sm and md) */}
+          {/* MOBILE */}
           <div className="lg:hidden fixed inset-0 bg-white z-50 animate-fadeIn">
             <GroupInfoPanel
               group={selectedChat}
