@@ -81,7 +81,7 @@ export default function ChatHeader({
 
         {/* DROPDOWN */}
         {openMenu && (
-          <div className="absolute right-0 top-10 w-44 bg-white border rounded-lg shadow-lg py-2 z-50">
+          <div className="absolute right-0 top-10 w-44 bg-stone-100 border rounded-lg shadow-lg py-2 z-50">
             {isGroup ? (
               <>
                 <MenuItem label="Group Info" onClick={onOpenInfo} />
